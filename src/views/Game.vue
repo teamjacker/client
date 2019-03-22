@@ -1,0 +1,218 @@
+<template>
+  <div>
+    <h1 class="title">jackQuery</h1>
+    <div class="speed-buttons">
+
+    </div>
+    <div class="main-buttons">
+      <button @click.prevent="shuffleDeck(); playSound('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3')" class="button is-primary">
+        Shuffle
+        <i class="fas fa-random"></i>
+      </button>
+    </div>
+
+    <transition-group :name="shuffleSpeed" tag="div" class="deck">
+      <a
+        @click.prevent="score([card.score, index]); playSound('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3')"
+        v-for="(card, index) in cards"
+        :key="card.id"
+        class="card selected"
+        :class="suitColor[card.suit]"
+        :style="{'pointer-events':card.selected,'background-color':card.color}"
+      >
+        <div v-show="card.hidden">
+          <span class="card__suit card__suit--top">{{ card.suit }}</span>
+          <span class="card__number">{{ card.rank }}</span>
+          <span class="card__suit card__suit--bottom">{{ card.suit }}</span>
+        </div>
+      </a>
+    </transition-group>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import { mapState, mapMutations } from "vuex";
+
+export default {
+  name: "game",
+  computed: {
+    localComputed() {
+      return "Hehe";
+    },
+    ...mapState([
+      "ranks",
+      "suits",
+      "cards",
+      "suitColor",
+      "players",
+      "counting",
+      "shuffleSpeed",
+      "shuffleTypes",
+      "isDeckShuffled"
+    ])
+  },
+  data() {
+    return {};
+  },
+  created() {
+    console.log("masuk created");
+    this.displayInitialDeck();
+    this.shuffleDeck();
+  },
+  methods: {
+    playSound(sound) {
+      if (sound) {
+        var audio = new Audio(sound);
+        audio.play();
+      }
+    },
+    ...mapMutations(["score", "displayInitialDeck", "shuffleDeck"])
+  }
+};
+</script>
+
+
+<style>
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700");
+html, body, #app {
+    height: 100%;
+    background: ghostwhite;
+}
+
+.title {
+    font-family: Roboto Slab, sans-serif;
+    text-align: center;
+    padding-top: 30px;
+    margin-bottom: 0 !important;
+    font-weight: 300;
+    font-size: 3rem;
+}
+
+.vue-logo {
+    height: 55px;
+    position: relative;
+    top: 10px;
+}
+
+.speed-buttons {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.speed-buttons .button {
+    height: 2.50em;
+}
+
+.main-buttons {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+    margin-bottom: 0 !important;
+}
+
+.count-section {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.fas {
+    padding-left: 5px;
+}
+
+.deck {
+    margin-left: 30px;
+    padding-top: 30px;
+}
+
+.card {
+    width: 75px;
+    height: 100px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 2px;
+}
+
+.card__suit {
+    width: 100%;
+    display: block;
+}
+
+.card__suit--top {
+    text-align: left;
+    padding-left: 5px;
+}
+
+.card__suit--bottom {
+    position: absolute;
+    bottom: 0px;
+    text-align: left;
+    transform: rotate(180deg);
+    padding-left: 5px;
+}
+
+.card__number {
+    width: 100%;
+    position: absolute;
+    top: 38%;
+    text-align: center;
+}
+
+.red {
+    color: #FF0000;
+}
+
+.black {
+    color: #000;
+}
+
+.twitter-section {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.twitter-section .fa-twitter-square {
+    color: #00d1b2;
+    font-size: 30px;
+}
+
+.shuffleSlow-move {
+    transition: transform 2s;
+}
+
+.shuffleMedium-move {
+    transition: transform 1s;
+}
+
+.shuffleFast-move {
+    transition: transform 0.5s;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+@media (max-width: 1210px) {
+    .deck {
+        position: initial;
+        top: 0;
+    }
+    .twitter-section {
+        display: none;
+    }
+}
+
+/* MY STYLE */
+
+.disabled {
+    pointer-events: none
+}
+</style>
