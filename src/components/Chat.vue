@@ -1,31 +1,24 @@
 <template>
-  <div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-        <div class="online">
-          <h4 class="fontcolor">Who's Online</h4>
-          <hr>
-          <div class="chat">
-            <!-- <p>{{chat.text}}</p> -->
-            <div v-for="chat in texts" v-bind:key="chat.id" class="chats">
-              <p class="text">{{chat.username}}: {{chat.text}}</p>
-            </div>
-          </div>
-          <div>
-            <form v-on:submit.prevent="sendMessage" class="send">
-              <input
-                v-model="text"
-                type="text"
-                name="text"
-                id="text"
-                class="form-control"
-                placeholder="Send a message"
-              >
-              <button type="submit"></button>
-            </form>
-          </div>
-        </div>
+  <div class="online">
+    <h4 class="fontcolor">Who's Online</h4>
+    <hr>
+    <div class="chat ">
+      <div v-for="chat in texts" v-bind:key="chat.id" class="chats" autocomplete="off">
+        <p class="text">{{chat.username}}: {{chat.text}}</p>
       </div>
+    </div>
+    <div>
+      <form v-on:submit.prevent="sendMessage" class>
+        <input
+          v-model="text"
+          type="text"
+          name="text"
+          id="text"
+          class="form-control"
+          placeholder="Send a message"
+        >
+        <button type="submit">SEND</button>
+      </form>
     </div>
   </div>
 </template>
@@ -89,10 +82,12 @@
   /* border: 1px solid black; */
   align-items: center;
   border-radius: 2px;
-  height: 600px;
+  width: 400px;
   position: relative;
-  left: 840px;
-  top: -260px;
+  /* left: 840px; */
+  top: -250px;
+  right:-100px;
+  float: right;
   background-color: #0f042f;
 }
 
@@ -114,14 +109,14 @@
 
 
 <script>
-import db from '@/api/firebase.js';
+import db from "@/api/firebase.js";
 
 export default {
-  name: 'Chat',
+  name: "Chat",
   data() {
     return {
-      text: '',
-      texts: [],
+      text: "",
+      texts: []
     };
   },
   methods: {
@@ -129,37 +124,37 @@ export default {
       // console.log(this.text)
       this.username = localStorage.user;
       console.log(this.username);
-      db.collection('Messages')
+      db.collection("Messages")
         .add({
           username: this.username,
           text: this.text,
-          createdAt: new Date(),
+          createdAt: new Date()
         })
-        .then((docRef) => {
+        .then(docRef => {
           // console.log(docRef)
           // console.log(docRef.text)
           // console.log(docRef.id)
-          this.text = '';
+          this.text = "";
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
+    }
   },
   created() {
-    db.collection('Messages')
-      .orderBy('createdAt')
-      .onSnapshot((docs) => {
+    db.collection("Messages")
+      .orderBy("createdAt")
+      .onSnapshot(docs => {
         this.texts = [];
         // console.log(docs, 'onSnapshot')
-        docs.forEach((doc) => {
+        docs.forEach(doc => {
           this.texts.push(doc.data());
         });
         // console.log(this.texts)
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
-  },
+  }
 };
 </script>

@@ -5,7 +5,7 @@
         class="col-lg-12 col-md-12 d-flex justify-content-center align-items-center"
         style="height: 80vh"
       >
-        <div class="card login">
+        <div class="login">
           <div class="card-body">
             <h2 class="card-title text-center">Login</h2>
             <form @submit.prevent="login" class="text-center">
