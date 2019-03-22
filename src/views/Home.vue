@@ -10,6 +10,7 @@
           >create room</button>
         </div>
         <ListRoom class="mt-5" v-for="(room, index) in rooms" :key="index" :rooms="room"/>
+        <Chat />
       </div>
     </div>
 
@@ -47,11 +48,13 @@
 <script>
 import db from '@/api/firebase';
 import ListRoom from '@/components/ListRoom.vue';
+import Chat from '@/components/Chat.vue';
 
 export default {
   name: 'home',
   components: {
     ListRoom,
+    Chat,
   },
   data() {
     return {
