@@ -4,13 +4,7 @@
     <div class="navbar-brand">
       <img src="../assets/logo.png" width="50" height="50" alt>
     </div>
-    <div
-      v-if="isLogin"
-      class="btn btn-md btn-outline-dark"
-      @click.prevent="logout"
-      >
-      Logout
-    </div>
+    <div v-if="isLogin" class="btn btn-md btn-outline-dark" @click.prevent="logout">Logout</div>
   </nav>
 </template>
 
@@ -36,6 +30,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

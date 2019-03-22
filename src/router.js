@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Login from './views/Login.vue';
 import Home from './views/Home.vue';
+import Game from './views/Game.vue';
 
 Vue.use(Router);
 
@@ -9,13 +11,9 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      redirect: '/home',
-    },
-    {
       path: '/login',
       name: 'login',
-      component: () => import('./views/Login.vue'),
+      component: Login,
     },
     {
       path: '/home',
@@ -23,9 +21,9 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      path: '/game',
+      name: 'game',
+      component: Game,
     },
     {
       path: '/game/:id',
