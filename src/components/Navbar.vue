@@ -2,7 +2,7 @@
   <!-- Just an image -->
   <nav class="navbar navbar-light bg-light">
     <div class="navbar-brand">
-      <img src="../assets/logo.png" width="50" height="50" alt>
+      <!-- <img src="../assets/logo.png" width="50" height="50" alt> -->
     </div>
     <button
       v-if="isLogin"
