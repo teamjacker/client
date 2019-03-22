@@ -127,8 +127,8 @@ export default {
   methods: {
     sendMessage() {
       // console.log(this.text)
-      this.username = localStorage.user
-      console.log(this.username)
+      this.username = localStorage.user;
+      console.log(this.username);
       db.collection('Messages')
         .add({
           username: this.username,
