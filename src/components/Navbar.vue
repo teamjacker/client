@@ -18,7 +18,11 @@
 export default {
   name: 'navbar',
   created() {
-    localStorage.getItem('user') ? this.isLogin = true : this.isLogin = false;
+    if (localStorage.getItem('user')) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
   },
   data() {
     return {
