@@ -7,7 +7,7 @@
             data-target="#showModal"
             data-toggle="modal"
             class="btn btn-md btn-outline-dark"
-            >create room</button>
+          >create room</button>
         </div>
         <ListRoom class="mt-5" v-for="(room, index) in rooms" :key="index" :rooms="room"/>
       </div>
@@ -30,17 +30,13 @@
             </form>
           </div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button
-            type="button"
-            class="btn btn-secondary"
-            data-dismiss="modal">Close
-            </button>
-            <button
-            @click.prevent="createRoom"
-            type="button"
-            class="btn btn-primary"
-            data-dismiss="modal">
-            Create</button>
+              @click.prevent="createRoom"
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+            >Create</button>
           </div>
         </div>
       </div>
